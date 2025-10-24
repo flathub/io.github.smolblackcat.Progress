@@ -2,7 +2,7 @@
   "id": "io.github.smolblackcat.Progress",
   "runtime": "org.gnome.Platform",
   "sdk": "org.gnome.Sdk",
-  "runtime-version": "47",
+  "runtime-version": "49",
   "command": "progress",
   "finish-args": [
     "--socket=fallback-x11",
@@ -29,15 +29,12 @@
         "-Dbuild-demos=false",
         "-Dbuild-tests=false"
       ],
-      "cleanup": [
-        "/lib/gdkmm-4.0",
-        "/lib/gtkmm-4.0"
-      ],
+      "cleanup": ["/lib/gdkmm-4.0", "/lib/gtkmm-4.0"],
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.gnome.org/sources/gtkmm/4.16/gtkmm-4.16.0.tar.xz",
-          "sha256": "3b23fd3abf8fb223b00e9983b6010af2db80e38c89ab6994b8b6230aa85d60f9"
+          "url": "https://download.gnome.org/sources/gtkmm/4.20/gtkmm-4.20.0.tar.xz",
+          "sha256": "daad9bf9b70f90975f91781fc7a656c923a91374261f576c883cd3aebd59c833"
         }
       ],
       "modules": [
@@ -49,15 +46,12 @@
             "-Dbuild-examples=false",
             "-Dbuild-documentation=false"
           ],
-          "cleanup": [
-            "/include/sigc++-3.0",
-            "/lib/sigc++-3.0"
-          ],
+          "cleanup": ["/include/sigc++-3.0", "/lib/sigc++-3.0"],
           "sources": [
             {
               "type": "archive",
-              "url": "https://download.gnome.org/sources/libsigc++/3.0/libsigc++-3.0.7.tar.xz",
-              "sha256": "bfbe91c0d094ea6bbc6cbd3909b7d98c6561eea8b6d9c0c25add906a6e83d733"
+              "url": "https://download.gnome.org/sources/libsigc++/3.6/libsigc++-3.6.0.tar.xz",
+              "sha256": "c3d23b37dfd6e39f2e09f091b77b1541fbfa17c4f0b6bf5c89baef7229080e17"
             }
           ]
         },
@@ -69,9 +63,7 @@
             "-Dbuild-examples=false",
             "-Dbuild-tests=false"
           ],
-          "cleanup": [
-            "/lib/cairomm-1.18"
-          ],
+          "cleanup": ["/lib/cairomm-1.18"],
           "sources": [
             {
               "type": "archive",
@@ -83,14 +75,12 @@
         {
           "name": "glibmm",
           "buildsystem": "meson",
-          "config-opts": [
-            "-Dbuild-examples=false"
-          ],
+          "config-opts": ["-Dbuild-examples=false"],
           "cleanup": [
-            "/include/glibmm-2.68",
-            "/include/giomm-2.68",
-            "/lib/glibmm-2.68",
-            "/lib/giomm-2.68",
+            "/include/glibmm-2.82",
+            "/include/giomm-2.82",
+            "/lib/glibmm-2.82",
+            "/lib/giomm-2.82",
             "/lib/libglibmm_generate_extra_defs*"
           ],
           "sources": [
@@ -130,21 +120,41 @@
         }
       ]
     },
+
+    {
+      "name": "spdlog",
+      "buildsystem": "cmake",
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/gabime/spdlog.git",
+          "tag": "v1.15.0"
+        }
+      ],
+      "config-opts": [
+        "-DSPDLOG_BUILD_EXAMPLE=OFF",
+        "-DSPDLOG_BUILD_TESTS=OFF",
+        "-DSPDLOG_ENABLE_PCH=ON",
+        "-DSPDLOG_BUILD_SHARED=ON"
+      ]
+    },
     {
       "name": "progress-tracker",
       "buildsystem": "cmake-ninja",
       "builddir": true,
       "config-opts": [
-        "-DFLATPAK=True",
-        "-DCMAKE_BUILD_TYPE=Release"
+        "-DDEVELOPMENT=OFF",
+        "-DFLATPAK=ON",
+        "-DCMAKE_INSTALL_PREFIX=/app"
       ],
       "sources": [
         {
           "type": "git",
           "url": "https://github.com/smolBlackCat/progress-tracker.git",
-          "tag": "v1.6"
+          "tag": "v1.7"
         }
-      ]
+      ],
+      "post-install": ["glib-compile-schemas /app/share/glib-2.0/schemas/"]
     }
   ]
 }
