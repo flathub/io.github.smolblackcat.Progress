@@ -128,7 +128,7 @@
         {
           "type": "git",
           "url": "https://github.com/gabime/spdlog.git",
-          "branch": "v1.x"
+          "tag": "v1.15.0"
         }
       ],
       "config-opts": [
