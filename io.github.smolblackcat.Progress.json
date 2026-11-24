@@ -67,7 +67,7 @@
                     "type": "git",
                     "url": "https://github.com/smolBlackCat/progress-tracker.git",
                     "tag": "v1.8",
-                    "commit": "ec38bb6dda183e4d5d05d3401ccd23197c17d0d5",
+                    "commit": "91f9d250d429771e8852976306e1e2f8b682a136",
                     "x-checker-data": {
                         "is-main-source": true,
                         "type": "git",
